@@ -540,7 +540,7 @@ final class FileTranscriptionService: ObservableObject {
 
             // Transcribe using chunked processing for long files
             // This reads audio in ~20 minute segments to avoid memory overflow on 3+ hour files
-            let chunkDurationSeconds: Double = 20 * 60 // 20 minutes per chunk (well under 24min model limit)
+            let chunkDurationSeconds: Double = provider is NemotronTranscribeProvider ? Double(NemotronTranscribeFiles.chunkSeconds) : 20 * 60 // 20 minutes per chunk (well under 24min model limit)
             let sampleRate: Double = 16_000 // Target sample rate for ASR
             let samplesPerChunk = Int(chunkDurationSeconds * sampleRate)
 

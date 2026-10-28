@@ -7,6 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AEA4000000000000000000C8 /* libggml-base.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000064 /* libggml-base.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA40000000000000000012C /* libggml-base.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000064 /* libggml-base.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA4000000000000000000C9 /* libggml-blas.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000065 /* libggml-blas.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA40000000000000000012D /* libggml-blas.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000065 /* libggml-blas.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA4000000000000000000CA /* libggml-cpu.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000066 /* libggml-cpu.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA40000000000000000012E /* libggml-cpu.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000066 /* libggml-cpu.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA4000000000000000000CB /* libggml-metal.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000067 /* libggml-metal.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA40000000000000000012F /* libggml-metal.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000067 /* libggml-metal.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA4000000000000000000CC /* libggml.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000068 /* libggml.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA400000000000000000130 /* libggml.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000068 /* libggml.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA4000000000000000000CD /* libllama-common.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000069 /* libllama-common.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA400000000000000000131 /* libllama-common.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000069 /* libllama-common.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA4000000000000000000CE /* libllama.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA40000000000000000006A /* libllama.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA400000000000000000132 /* libllama.0.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA40000000000000000006A /* libllama.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA4000000000000000000CF /* libnemo_speech_asr.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA40000000000000000006B /* libnemo_speech_asr.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA400000000000000000133 /* libnemo_speech_asr.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA40000000000000000006B /* libnemo_speech_asr.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA4000000000000000000D0 /* libnemo_speech_asr_c.1.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA40000000000000000006C /* libnemo_speech_asr_c.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA400000000000000000134 /* libnemo_speech_asr_c.1.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA40000000000000000006C /* libnemo_speech_asr_c.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA4000000000000000000D1 /* libnemo_speech_speechlm.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA40000000000000000006D /* libnemo_speech_speechlm.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA400000000000000000135 /* libnemo_speech_speechlm.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA40000000000000000006D /* libnemo_speech_speechlm.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA4000000000000000000D2 /* libnemo_speech_text_normalization.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA40000000000000000006E /* libnemo_speech_text_normalization.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA400000000000000000136 /* libnemo_speech_text_normalization.dylib in Embed Nemotron Runtime */ = {isa = PBXBuildFile; fileRef = AEA40000000000000000006E /* libnemo_speech_text_normalization.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		AEA400000000000000000033 /* NemotronNotices in Resources */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000032 /* NemotronNotices */; };
+		AEA400000000000000000034 /* NemotronNotices in Resources */ = {isa = PBXBuildFile; fileRef = AEA400000000000000000032 /* NemotronNotices */; };
+		AEA300000000000000000003 /* CNemotron in Frameworks */ = {isa = PBXBuildFile; productRef = AEA300000000000000000002 /* CNemotron */; };
+		AEA300000000000000000004 /* CNemotron in Frameworks */ = {isa = PBXBuildFile; productRef = AEA300000000000000000002 /* CNemotron */; };
 		AD1130000000000000000004 /* OverlayCaptionPresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1130000000000000000003 /* OverlayCaptionPresentationTests.swift */; };
 		AD1030000000000000000004 /* HoldToMutePresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1030000000000000000003 /* HoldToMutePresentationTests.swift */; };
 		AD1030000000000000000002 /* HoldToMuteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1030000000000000000001 /* HoldToMuteTests.swift */; };
@@ -167,6 +193,48 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		AEA400000000000000000014 /* Embed Nemotron Runtime */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = NeMoSpeech;
+			dstSubfolderSpec = 10;
+			files = (
+				AEA4000000000000000000C8 /* libggml-base.0.dylib in Embed Nemotron Runtime */,
+				AEA4000000000000000000C9 /* libggml-blas.0.dylib in Embed Nemotron Runtime */,
+				AEA4000000000000000000CA /* libggml-cpu.0.dylib in Embed Nemotron Runtime */,
+				AEA4000000000000000000CB /* libggml-metal.0.dylib in Embed Nemotron Runtime */,
+				AEA4000000000000000000CC /* libggml.0.dylib in Embed Nemotron Runtime */,
+				AEA4000000000000000000CD /* libllama-common.0.dylib in Embed Nemotron Runtime */,
+				AEA4000000000000000000CE /* libllama.0.dylib in Embed Nemotron Runtime */,
+				AEA4000000000000000000CF /* libnemo_speech_asr.dylib in Embed Nemotron Runtime */,
+				AEA4000000000000000000D0 /* libnemo_speech_asr_c.1.dylib in Embed Nemotron Runtime */,
+				AEA4000000000000000000D1 /* libnemo_speech_speechlm.dylib in Embed Nemotron Runtime */,
+				AEA4000000000000000000D2 /* libnemo_speech_text_normalization.dylib in Embed Nemotron Runtime */,
+			);
+			name = "Embed Nemotron Runtime";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AEA400000000000000000015 /* Embed Nemotron Runtime */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = NeMoSpeech;
+			dstSubfolderSpec = 10;
+			files = (
+				AEA40000000000000000012C /* libggml-base.0.dylib in Embed Nemotron Runtime */,
+				AEA40000000000000000012D /* libggml-blas.0.dylib in Embed Nemotron Runtime */,
+				AEA40000000000000000012E /* libggml-cpu.0.dylib in Embed Nemotron Runtime */,
+				AEA40000000000000000012F /* libggml-metal.0.dylib in Embed Nemotron Runtime */,
+				AEA400000000000000000130 /* libggml.0.dylib in Embed Nemotron Runtime */,
+				AEA400000000000000000131 /* libllama-common.0.dylib in Embed Nemotron Runtime */,
+				AEA400000000000000000132 /* libllama.0.dylib in Embed Nemotron Runtime */,
+				AEA400000000000000000133 /* libnemo_speech_asr.dylib in Embed Nemotron Runtime */,
+				AEA400000000000000000134 /* libnemo_speech_asr_c.1.dylib in Embed Nemotron Runtime */,
+				AEA400000000000000000135 /* libnemo_speech_speechlm.dylib in Embed Nemotron Runtime */,
+				AEA400000000000000000136 /* libnemo_speech_text_normalization.dylib in Embed Nemotron Runtime */,
+			);
+			name = "Embed Nemotron Runtime";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7C5AF14D2F15041600DE21B0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -203,6 +271,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AEA400000000000000000064 /* libggml-base.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "Vendor/Nemotron/Runtime/libggml-base.0.dylib"; sourceTree = SOURCE_ROOT; };
+		AEA400000000000000000065 /* libggml-blas.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "Vendor/Nemotron/Runtime/libggml-blas.0.dylib"; sourceTree = SOURCE_ROOT; };
+		AEA400000000000000000066 /* libggml-cpu.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "Vendor/Nemotron/Runtime/libggml-cpu.0.dylib"; sourceTree = SOURCE_ROOT; };
+		AEA400000000000000000067 /* libggml-metal.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "Vendor/Nemotron/Runtime/libggml-metal.0.dylib"; sourceTree = SOURCE_ROOT; };
+		AEA400000000000000000068 /* libggml.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "Vendor/Nemotron/Runtime/libggml.0.dylib"; sourceTree = SOURCE_ROOT; };
+		AEA400000000000000000069 /* libllama-common.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "Vendor/Nemotron/Runtime/libllama-common.0.dylib"; sourceTree = SOURCE_ROOT; };
+		AEA40000000000000000006A /* libllama.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "Vendor/Nemotron/Runtime/libllama.0.dylib"; sourceTree = SOURCE_ROOT; };
+		AEA40000000000000000006B /* libnemo_speech_asr.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "Vendor/Nemotron/Runtime/libnemo_speech_asr.dylib"; sourceTree = SOURCE_ROOT; };
+		AEA40000000000000000006C /* libnemo_speech_asr_c.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "Vendor/Nemotron/Runtime/libnemo_speech_asr_c.1.dylib"; sourceTree = SOURCE_ROOT; };
+		AEA40000000000000000006D /* libnemo_speech_speechlm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "Vendor/Nemotron/Runtime/libnemo_speech_speechlm.dylib"; sourceTree = SOURCE_ROOT; };
+		AEA40000000000000000006E /* libnemo_speech_text_normalization.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = "Vendor/Nemotron/Runtime/libnemo_speech_text_normalization.dylib"; sourceTree = SOURCE_ROOT; };
+		AEA400000000000000000032 /* NemotronNotices */ = {isa = PBXFileReference; lastKnownFileType = folder; name = NemotronNotices; path = Vendor/Nemotron/NemotronNotices; sourceTree = SOURCE_ROOT; };
 		AD1130000000000000000003 /* OverlayCaptionPresentationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayCaptionPresentationTests.swift; sourceTree = "<group>"; };
 		AD1030000000000000000003 /* HoldToMutePresentationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldToMutePresentationTests.swift; sourceTree = "<group>"; };
 		AD1030000000000000000001 /* HoldToMuteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldToMuteTests.swift; sourceTree = "<group>"; };
@@ -374,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEC300000000000000000003 /* FluidAEC3Bridge in Frameworks */,
+				AEA300000000000000000003 /* CNemotron in Frameworks */,
 				7C3697892ED70F9C005874CE /* DynamicNotchKit in Frameworks */,
 				7C5AF14B2F15041600DE21B0 /* MediaRemoteAdapter in Frameworks */,
 				7C9A71022F58B00000FB7CAF /* TranscribeCpp in Frameworks */,
@@ -396,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEC300000000000000000004 /* FluidAEC3Bridge in Frameworks */,
+				AEA300000000000000000004 /* CNemotron in Frameworks */,
 				A5B000000000000000000014 /* DynamicNotchKit in Frameworks */,
 				A5B000000000000000000015 /* MediaRemoteAdapter in Frameworks */,
 				A5B000000000000000000016 /* TranscribeCpp in Frameworks */,
@@ -422,12 +504,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AEA40000000000000000000A /* Nemotron Runtime */ = {
+			isa = PBXGroup;
+			name = "Nemotron Runtime";
+			sourceTree = "<group>";
+			children = (
+				AEA400000000000000000064 /* libggml-base.0.dylib */,
+				AEA400000000000000000065 /* libggml-blas.0.dylib */,
+				AEA400000000000000000066 /* libggml-cpu.0.dylib */,
+				AEA400000000000000000067 /* libggml-metal.0.dylib */,
+				AEA400000000000000000068 /* libggml.0.dylib */,
+				AEA400000000000000000069 /* libllama-common.0.dylib */,
+				AEA40000000000000000006A /* libllama.0.dylib */,
+				AEA40000000000000000006B /* libnemo_speech_asr.dylib */,
+				AEA40000000000000000006C /* libnemo_speech_asr_c.1.dylib */,
+				AEA40000000000000000006D /* libnemo_speech_speechlm.dylib */,
+				AEA40000000000000000006E /* libnemo_speech_text_normalization.dylib */,
+				AEA400000000000000000032 /* NemotronNotices */,
+			);
+		};
 		7C078D862E3B339200FB7CAC = {
 			isa = PBXGroup;
 			children = (
 				7C078D912E3B339200FB7CAC /* Sources/Fluid */,
 				F5E000000000000000000010 /* Sources/FVServe */,
 				AEC3C0000000000000000001 /* WebRTCAEC3Notices */,
+				AEA40000000000000000000A /* Nemotron Runtime */,
 				7CDB0A242F3C4D5600FB7CAD /* Tests */,
 				7CDB0A282F3C4D5600FB7CAD /* Frameworks */,
 			);
@@ -626,6 +728,7 @@
 				7C078D8B2E3B339200FB7CAC /* Sources */,
 				7C078D8C2E3B339200FB7CAC /* Frameworks */,
 				7C5AF14D2F15041600DE21B0 /* Embed Frameworks */,
+				AEA400000000000000000014 /* Embed Nemotron Runtime */,
 				7C078D8D2E3B339200FB7CAC /* Resources */,
 				F5E000000000000000000015 /* Embed Helpers */,
 			);
@@ -640,6 +743,7 @@
 			name = fluid;
 			packageProductDependencies = (
 				AEC300000000000000000002 /* FluidAEC3Bridge */,
+				AEA300000000000000000002 /* CNemotron */,
 				7C078DA42E3B386A00FB7CAC /* FluidAudio */,
 				7C3697882ED70F9C005874CE /* DynamicNotchKit */,
 				7CE006BC2E80EBE600DDCCD6 /* AppUpdater */,
@@ -680,6 +784,7 @@
 				A5B000000000000000000006 /* Sources */,
 				A5B000000000000000000007 /* Frameworks */,
 				A5B000000000000000000008 /* Embed Frameworks */,
+				AEA400000000000000000015 /* Embed Nemotron Runtime */,
 				A5B000000000000000000009 /* Resources */,
 				A5B00000000000000000000A /* Stage ASR Baseline Inputs */,
 			);
@@ -693,6 +798,7 @@
 			name = FluidASRBaselineHost;
 			packageProductDependencies = (
 				AEC300000000000000000002 /* FluidAEC3Bridge */,
+				AEA300000000000000000002 /* CNemotron */,
 				7C078DA42E3B386A00FB7CAC /* FluidAudio */,
 				7C3697882ED70F9C005874CE /* DynamicNotchKit */,
 				7CE006BC2E80EBE600DDCCD6 /* AppUpdater */,
@@ -782,6 +888,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				AEC300000000000000000001 /* XCLocalSwiftPackageReference "WebRTCAudioProcessing" */,
+				AEA300000000000000000001 /* XCLocalSwiftPackageReference "Nemotron" */,
 				7C078DA32E3B386A00FB7CAC /* XCRemoteSwiftPackageReference "FluidAudio" */,
 				7CE006BB2E80EBE600DDCCD6 /* XCRemoteSwiftPackageReference "AppUpdater" */,
 				7C3697872ED70F9C005874CE /* XCRemoteSwiftPackageReference "DynamicNotchKit" */,
@@ -809,6 +916,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEC3C0000000000000000002 /* WebRTCAEC3Notices in Resources */,
+				AEA400000000000000000033 /* NemotronNotices in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,6 +932,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEA400000000000000000034 /* NemotronNotices in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1534,6 +1643,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		AEA300000000000000000001 /* XCLocalSwiftPackageReference "Nemotron" */ = {isa = XCLocalSwiftPackageReference; relativePath = Vendor/Nemotron; };
 		AEC300000000000000000001 /* XCLocalSwiftPackageReference "WebRTCAudioProcessing" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Vendor/WebRTCAudioProcessing;
@@ -1594,6 +1704,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AEA300000000000000000002 /* CNemotron */ = {isa = XCSwiftPackageProductDependency; package = AEA300000000000000000001 /* XCLocalSwiftPackageReference "Nemotron" */; productName = CNemotron; };
 		AEC300000000000000000002 /* FluidAEC3Bridge */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AEC300000000000000000001 /* XCLocalSwiftPackageReference "WebRTCAudioProcessing" */;

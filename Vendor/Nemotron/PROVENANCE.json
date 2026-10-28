@@ -1,0 +1,20 @@
+{
+  "repository": "https://github.com/NVIDIA/NeMo-Speech.cpp",
+  "commit": "66d50d91b75a406becd95fbaf39d2c9c13e95d7c",
+  "version": "0.2.0+nightly.66d50d9",
+  "archiveURL": "https://github.com/NVIDIA/NeMo-Speech.cpp/releases/download/nightly/nemo-speech-nightly-macos-aarch64-metal.tar.gz",
+  "archiveSHA256": "4621515b0050d283d3a2a3f0382631ee7f876eea46608fdb52f7a05f50c958fc",
+  "files": {
+    "libggml-base.0.dylib": "38c4380d3ddc9faca32b15b91c878b5da89af63270ed2ce2e33fd73ef601cf67",
+    "libggml-blas.0.dylib": "8b66e983da6952342e7e4e70062897dafe3e06696545a0910cf775417d6d3384",
+    "libggml-cpu.0.dylib": "84dce88e2cee84c8cec546fb508f536438fc01f73ee83bc423227b2555e8cf63",
+    "libggml-metal.0.dylib": "abf8143d5d986d0263225d5883a0ad00b724bd73cc5ca988b5d49db1f4d0a786",
+    "libggml.0.dylib": "7204eb88974620d3c5ca4b89b4c7d63dc22319ddb7c28a5fcc90a65a0d7d55f6",
+    "libllama-common.0.dylib": "42d38ba7c9bfdccf265778bbb56c3afe2e55fa51b37bdbd1c3d19cae9491a90a",
+    "libllama.0.dylib": "4ad06196c0a655ad742a9b697fdeff4118c863ddabafe3d9369166aa57f7e4b2",
+    "libnemo_speech_asr.dylib": "387ba9fd746ba35c34f401143bcaa9381bdf93621bf34914e19264d40324e700",
+    "libnemo_speech_asr_c.1.dylib": "98f7ea739b1d61c44a6f62825383bf1d0e3816ce5cedb910d7cb0e8383d02052",
+    "libnemo_speech_speechlm.dylib": "96f7ad49c7951098eb59f4eefd496efd784a4e131638a4dfec5a29f284b446b0",
+    "libnemo_speech_text_normalization.dylib": "fc1c6a4b2e6cf5fbceff17789e1fa338533f98965734b6cdb66df7123ef0f5b3"
+  }
+}

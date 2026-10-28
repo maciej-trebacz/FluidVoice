@@ -5192,6 +5192,7 @@ final class SettingsStore: ObservableObject {
         case parakeetRealtime = "parakeet-realtime"
         case qwen3Asr = "qwen3-asr"
         case cohereTranscribeSixBit = "cohere-transcribe-6bit"
+        case nemotronTranscribe = "nemotron-3.5-transcribe-30b-a4b"
         case nemotronOffline = "nemotron-3.5-offline"
         case nemotronStreaming = "nemotron-3.5-streaming"
         case nemotronStreaming320 = "nemotron-3.5-streaming-320"
@@ -5220,6 +5221,7 @@ final class SettingsStore: ObservableObject {
 
         /// Relative product ratings for display and sorting, not benchmark accuracy.
         var hasPerformanceRatings: Bool {
+            if self == .nemotronTranscribe { return false }
             guard let descriptor = self.parakeetDescriptor else { return true }
             return descriptor.performanceRatings != nil
         }
@@ -5232,6 +5234,7 @@ final class SettingsStore: ObservableObject {
 
         var displayName: String {
             switch self {
+            case .nemotronTranscribe: return "Nemotron 3.5 Transcribe"
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro: return self.parakeetDescriptor?.displayName ?? self.rawValue
             case .parakeetRealtime: return "Parakeet Flash (Beta)"
             case .qwen3Asr: return "Qwen3 ASR (Beta)"
@@ -5253,6 +5256,7 @@ final class SettingsStore: ObservableObject {
 
         var languageSupport: String {
             switch self {
+            case .nemotronTranscribe: return "Multilingual (Select Language)"
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro: return self.parakeetDescriptor?.languageSupport ?? "English Only"
             case .parakeetRealtime: return "English Only (Live Streaming)"
             case .qwen3Asr, .qwen3Asr17B: return "30 Languages"
@@ -5267,6 +5271,7 @@ final class SettingsStore: ObservableObject {
 
         var downloadSize: String {
             switch self {
+            case .nemotronTranscribe: return "Local GGUF files"
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro: return self.parakeetDescriptor?.downloadSize ?? ""
             case .parakeetRealtime: return "~428.4 MiB"
             case .qwen3Asr: return "~2.0 GiB"
@@ -5288,6 +5293,7 @@ final class SettingsStore: ObservableObject {
 
         var expectedDownloadBytes: Int64 {
             switch self {
+            case .nemotronTranscribe: return 0
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro: return self.parakeetDescriptor?.expectedDownloadBytes ?? 0
             case .parakeetRealtime: return 449_190_189
             case .qwen3Asr: return 2000 * 1024 * 1024
@@ -5307,6 +5313,7 @@ final class SettingsStore: ObservableObject {
 
         var requiresAppleSilicon: Bool {
             switch self {
+            case .nemotronTranscribe: return true
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro, .parakeetRealtime, .qwen3Asr, .qwen3Asr17B, .cohereTranscribeSixBit, .nemotronOffline, .nemotronStreaming, .nemotronStreaming320: return true
             default: return false
             }
@@ -5314,6 +5321,7 @@ final class SettingsStore: ObservableObject {
 
         var isWhisperModel: Bool {
             switch self {
+            case .nemotronTranscribe: return false
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro, .parakeetRealtime, .qwen3Asr, .qwen3Asr17B, .cohereTranscribeSixBit, .nemotronOffline, .nemotronStreaming, .nemotronStreaming320, .appleSpeech,
                  .appleSpeechAnalyzer: return false
             default: return true
@@ -5431,6 +5439,7 @@ final class SettingsStore: ObservableObject {
         /// Human-readable marketing name for the card UI
         var humanReadableName: String {
             switch self {
+            case .nemotronTranscribe: return "Nemotron 3.5 Transcribe 30B-A4B"
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro: return self.parakeetDescriptor?.humanReadableName ?? self.rawValue
             case .parakeetRealtime: return "Flash Dictation"
             case .qwen3Asr: return "Qwen3 - Multilingual"
@@ -5453,6 +5462,7 @@ final class SettingsStore: ObservableObject {
         /// One-line description for the card UI
         var cardDescription: String {
             switch self {
+            case .nemotronTranscribe: return "Transcribes on your Mac after recording stops. Select an IQ4_NL model folder and the spoken language."
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro:
                 return self.parakeetDescriptor?.cardDescription ?? ""
             case .parakeetRealtime:
@@ -5491,6 +5501,7 @@ final class SettingsStore: ObservableObject {
         /// Minimum recommended RAM in GB for this model to run safely
         var requiredMemoryGB: Double {
             switch self {
+            case .nemotronTranscribe: return 32.0
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro, .parakeetRealtime:
                 return 4.0
             case .qwen3Asr:
@@ -5537,6 +5548,7 @@ final class SettingsStore: ObservableObject {
         /// Speed rating (1-5, higher is faster)
         var speedRating: Int {
             switch self {
+            case .nemotronTranscribe: return 0
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro: return self.parakeetDescriptor?.performanceRatings?.speedRating ?? 0
             case .parakeetRealtime: return 5
             case .qwen3Asr: return 3
@@ -5558,6 +5570,7 @@ final class SettingsStore: ObservableObject {
         /// Accuracy rating (1-5, higher is more accurate)
         var accuracyRating: Int {
             switch self {
+            case .nemotronTranscribe: return 0
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro: return self.parakeetDescriptor?.performanceRatings?.accuracyRating ?? 0
             case .parakeetRealtime: return 4
             case .qwen3Asr: return 4
@@ -5579,6 +5592,7 @@ final class SettingsStore: ObservableObject {
         /// Exact speed percentage (0.0 - 1.0) for the liquid bars
         var speedPercent: Double {
             switch self {
+            case .nemotronTranscribe: return 0
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro: return self.parakeetDescriptor?.performanceRatings?.speedPercent ?? 0
             case .parakeetRealtime: return 1.0
             case .qwen3Asr: return 0.45
@@ -5600,6 +5614,7 @@ final class SettingsStore: ObservableObject {
         /// Exact accuracy percentage (0.0 - 1.0) for the liquid bars
         var accuracyPercent: Double {
             switch self {
+            case .nemotronTranscribe: return 0
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro: return self.parakeetDescriptor?.performanceRatings?.accuracyPercent ?? 0
             case .parakeetRealtime: return 0.75
             case .qwen3Asr: return 0.90
@@ -5621,6 +5636,7 @@ final class SettingsStore: ObservableObject {
         /// Optional badge text for the card (e.g., "FluidVoice Pick")
         var badgeText: String? {
             switch self {
+            case .nemotronTranscribe: return "Experimental"
             case .parakeetTDT: return "FluidVoice Pick"
             case .parakeetTDTv2: return "FluidVoice Pick"
             case .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro: return "New"
@@ -5637,6 +5653,7 @@ final class SettingsStore: ObservableObject {
         /// Optimization level for Apple Silicon (for display)
         var appleSiliconOptimized: Bool {
             switch self {
+            case .nemotronTranscribe: return true
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro, .parakeetRealtime, .qwen3Asr, .cohereTranscribeSixBit, .nemotronOffline, .nemotronStreaming, .nemotronStreaming320, .appleSpeechAnalyzer:
                 return true
             default:
@@ -5648,6 +5665,7 @@ final class SettingsStore: ObservableObject {
         /// Large Whisper models are too slow for streaming, so they only do final transcription on stop.
         var supportsStreaming: Bool {
             switch self {
+            case .nemotronTranscribe: return false
             case .qwen3Asr, .qwen3Asr17B, .whisperMedium, .whisperLargeTurbo, .whisperLarge:
                 return false // Too slow for real-time chunk processing
             default:
@@ -5710,6 +5728,7 @@ final class SettingsStore: ObservableObject {
         /// Which provider this model belongs to
         var provider: Provider {
             switch self {
+            case .nemotronTranscribe: return .nvidia
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro, .parakeetRealtime, .nemotronOffline, .nemotronStreaming, .nemotronStreaming320:
                 return .nvidia
             case .appleSpeech, .appleSpeechAnalyzer:
@@ -5731,6 +5750,7 @@ final class SettingsStore: ObservableObject {
         /// Whether this model is built-in or already downloaded on disk
         var isInstalled: Bool {
             switch self {
+            case .nemotronTranscribe: return (try? NemotronTranscribeFiles.selected()) != nil
             case .appleSpeech, .appleSpeechAnalyzer:
                 return true
             case .parakeetTDT, .parakeetTDTv2, .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro:
@@ -5822,6 +5842,7 @@ final class SettingsStore: ObservableObject {
         /// Brand/provider name for the model (NVIDIA, Apple, OpenAI)
         var brandName: String {
             switch self {
+            case .nemotronTranscribe: return "NVIDIA"
             case .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro:
                 return "FluidVoice"
             case .parakeetTDT, .parakeetTDTv2, .parakeetRealtime, .nemotronOffline, .nemotronStreaming, .nemotronStreaming320:
@@ -5848,6 +5869,7 @@ final class SettingsStore: ObservableObject {
         /// Brand color for the provider badge
         var brandColorHex: String {
             switch self {
+            case .nemotronTranscribe: return "#76B900"
             case .fluidParakeetMini, .fluidParakeetPico, .fluidParakeetPro:
                 return "#1A75FF" // FluidBrandColors.blue
             case .parakeetTDT, .parakeetTDTv2, .parakeetRealtime, .nemotronOffline, .nemotronStreaming, .nemotronStreaming320:

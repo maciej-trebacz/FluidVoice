@@ -1075,6 +1075,7 @@ final class ASRService: ObservableObject {
     private var fluidAudioProvider: FluidAudioProvider?
     private var parakeetRealtimeProvider: ParakeetRealtimeProvider?
     private var externalCoreMLProvider: ExternalCoreMLTranscriptionProvider?
+    private var nemotronTranscribeProvider: NemotronTranscribeProvider?
     private var nemotronProviders: [NemotronProvider.Mode: NemotronProvider] = [:]
     private var whisperProvider: WhisperProvider?
     private var appleSpeechProvider: AppleSpeechProvider?
@@ -1184,6 +1185,7 @@ final class ASRService: ObservableObject {
         self.parakeetRealtimeProvider = nil
         self.externalCoreMLProvider = nil
         self.nemotronProviders.removeAll()
+        self.nemotronTranscribeProvider = nil
         self.whisperProvider = nil
         self.appleSpeechProvider = nil
         self._appleSpeechAnalyzerProvider = nil
@@ -1202,6 +1204,11 @@ final class ASRService: ObservableObject {
         #endif
 
         switch model {
+        case .nemotronTranscribe:
+            if let provider = self.nemotronTranscribeProvider { return provider }
+            let provider = NemotronTranscribeProvider()
+            self.nemotronTranscribeProvider = provider
+            return provider
         case .appleSpeechAnalyzer:
             if #available(macOS 26.0, *) {
                 return self.getAppleSpeechAnalyzerProvider()
@@ -1335,6 +1342,8 @@ final class ASRService: ObservableObject {
         if let injected = self.modelProvidersForTesting[model] { return injected }
         #endif
         switch model {
+        case .nemotronTranscribe:
+            return NemotronTranscribeProvider()
         case .appleSpeechAnalyzer:
             if #available(macOS 26.0, *) {
                 return AppleSpeechAnalyzerProvider()
@@ -1556,6 +1565,7 @@ final class ASRService: ObservableObject {
         self.fluidAudioProvider = nil
         self.parakeetRealtimeProvider = nil
         self.externalCoreMLProvider = nil
+        self.nemotronTranscribeProvider = nil
         self.whisperProvider = nil
         self.appleSpeechProvider = nil
         self._appleSpeechAnalyzerProvider = nil
@@ -4212,6 +4222,7 @@ final class ASRService: ObservableObject {
         self.parakeetRealtimeProvider = nil
         self.externalCoreMLProvider = nil
         self.nemotronProviders.removeAll()
+        self.nemotronTranscribeProvider = nil
         self.whisperProvider = nil
         self.appleSpeechProvider = nil
         self._appleSpeechAnalyzerProvider = nil
@@ -6970,6 +6981,7 @@ final class ASRService: ObservableObject {
     }
 
     private func cachedDeletionProvider(for model: SettingsStore.SpeechModel) -> TranscriptionProvider {
+        if model == .nemotronTranscribe, let provider = self.nemotronTranscribeProvider { return provider }
         // Nemotron keeps providers for both modes; retire the target's existing instance.
         if model == .nemotronOffline || model == .nemotronStreaming || model == .nemotronStreaming320,
            let cached = self.nemotronProviders[model.nemotronProviderMode]

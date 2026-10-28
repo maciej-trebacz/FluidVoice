@@ -169,6 +169,30 @@ final class VoiceEngineSettingsViewModel: ObservableObject {
         }
     }
 
+    func selectNemotronTranscribeFolder() {
+        guard !self.areSpeechModelActionsBlocked else { return }
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.allowsMultipleSelection = false
+        panel.prompt = "Select Model"
+        panel.message = "Select the folder containing the Nemotron 3.5 Transcribe IQ4_NL decoder and Encoder-F16 GGUF files."
+        panel.begin { [weak self] response in
+            guard response == .OK, let directory = panel.url, let self else { return }
+            guard !self.areSpeechModelActionsBlocked else { return }
+            do {
+                _ = try NemotronTranscribeFiles.resolve(directory: directory)
+                UserDefaults.standard.set(directory.path, forKey: NemotronTranscribeFiles.directoryKey)
+                self.activateSpeechModel(.nemotronTranscribe)
+                self.installations.refresh()
+            } catch {
+                self.asr.errorTitle = "Model Folder Not Valid"
+                self.asr.errorMessage = error.localizedDescription
+                self.asr.showError = true
+            }
+        }
+    }
+
     func cancelSpeechModelDownload() {
         guard self.downloadingModel != nil, !self.isCancellingModelDownload else { return }
         self.asr.cancelModelDownload()
@@ -204,6 +228,8 @@ final class VoiceEngineSettingsViewModel: ObservableObject {
     var modelDescriptionText: String {
         let model = self.settings.selectedSpeechModel
         switch model {
+        case .nemotronTranscribe:
+            return model.cardDescription
         case .appleSpeech:
             return "Apple Speech (Legacy) uses built-in macOS speech recognition. No model download required, works on Intel and Apple Silicon."
         case .appleSpeechAnalyzer:

@@ -20,6 +20,7 @@ final class SpeechModelInstallationSnapshot: ObservableObject {
             case realtime(folder: String, requiredModels: [String])
             case cohere(ExternalCoreMLASRModelSpec, storedPath: String?)
             case nemotron(folder: String)
+            case nemotronTranscribe(path: String?)
             case whisper(file: String, expectedBytes: Int64)
             case unavailable
         }
@@ -175,6 +176,8 @@ final class SpeechModelInstallationSnapshot: ObservableObject {
                     #else
                     kind = .unavailable
                     #endif
+                case .nemotronTranscribe:
+                    kind = .nemotronTranscribe(path: UserDefaults.standard.string(forKey: NemotronTranscribeFiles.directoryKey))
                 case .nemotronOffline:
                     kind = .nemotron(folder: "nemotron-3.5-asr-offline-6bit-CoreML")
                 case .nemotronStreaming, .nemotronStreaming320:
@@ -238,6 +241,8 @@ final class SpeechModelInstallationSnapshot: ObservableObject {
             case let .cohere(spec, storedPath):
                 let directory = storedPath.map { URL(fileURLWithPath: $0, isDirectory: true) } ?? spec.defaultCacheDirectory
                 exists = directory.map { spec.validatesInstalledArtifacts(at: $0) } ?? false
+            case let .nemotronTranscribe(path):
+                exists = path.flatMap { try? NemotronTranscribeFiles.resolve(directory: URL(fileURLWithPath: $0)) } != nil
             case let .nemotron(folder):
                 #if arch(arm64)
                 exists = caches.map { NemotronProvider.artifactsAreComplete(at: $0.appendingPathComponent(folder, isDirectory: true)) } ?? false

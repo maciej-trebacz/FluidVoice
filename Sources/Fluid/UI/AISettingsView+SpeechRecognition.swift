@@ -440,24 +440,38 @@ extension VoiceEngineSettingsView {
 
                     if !model.usesAppleLogo {
                         if isSelected {
-                            Button {
-                                self.viewModel.deleteSpeechModel(model)
-                            } label: {
-                                Image(systemName: "trash")
-                                    .font(.fluidSystem(size: 15))
-                                    .foregroundStyle(.red.opacity(0.7))
+                            if model == .nemotronTranscribe {
+                                Button("Remove") { self.viewModel.deleteSpeechModel(model) }
+                                    .buttonStyle(.plain)
+                                    .disabled(self.viewModel.areSpeechModelActionsBlocked)
+                                    .help("Forget the selected folder. The model files stay on disk.")
+                            } else {
+                                Button {
+                                    self.viewModel.deleteSpeechModel(model)
+                                } label: {
+                                    Image(systemName: "trash")
+                                        .font(.fluidSystem(size: 15))
+                                        .foregroundStyle(.red.opacity(0.7))
+                                }
+                                .buttonStyle(.plain)
+                                .disabled(self.viewModel.areSpeechModelActionsBlocked)
+                                .opacity(isSelected ? 1 : 0)
+                                .allowsHitTesting(isSelected)
+                                .accessibilityHidden(!isSelected)
                             }
-                            .buttonStyle(.plain)
-                            .disabled(self.viewModel.areSpeechModelActionsBlocked)
-                            .opacity(isSelected ? 1 : 0)
-                            .allowsHitTesting(isSelected)
-                            .accessibilityHidden(!isSelected)
                         }
                     }
                 }
             } else {
                 ZStack(alignment: .trailing) {
-                    if model.requiresExternalArtifacts {
+                    if model == .nemotronTranscribe {
+                        Button("Select Folder") { self.viewModel.selectNemotronTranscribeFolder() }
+                            .fluidGlassAction(prominent: true)
+                            .disabled(self.viewModel.areSpeechModelActionsBlocked)
+                            .opacity(isSelected ? 1 : 0)
+                            .allowsHitTesting(isSelected)
+                            .accessibilityHidden(!isSelected)
+                    } else if model.requiresExternalArtifacts {
                         HStack(spacing: 8) {
                             if model.externalCoreMLSpec?.sourceURL != nil {
                                 Button {
@@ -526,7 +540,7 @@ extension VoiceEngineSettingsView {
 
     @ViewBuilder
     private func speechModelLanguagePicker(for model: SettingsStore.SpeechModel) -> some View {
-        if model.isWhisperModel {
+        if model.isWhisperModel || model == .nemotronTranscribe {
             self.whisperLanguagePickerButton
         } else if model == .cohereTranscribeSixBit {
             Menu {
@@ -567,15 +581,19 @@ extension VoiceEngineSettingsView {
         guard let languageCode = self.settings.selectedWhisperLanguageCode,
               let language = VoiceEngineLanguageCatalog.whisperLanguage(forCode: languageCode)
         else {
-            return "Automatic"
+            return self.settings.selectedSpeechModel == .nemotronTranscribe ? "Unspecified" : "Automatic"
         }
         return language.displayName
     }
 
     private var filteredWhisperLanguages: [VoiceEngineLanguage] {
         let query = self.normalizedWhisperLanguageSearchText
-        guard !query.isEmpty else { return VoiceEngineLanguageCatalog.whisperLanguages }
-        return VoiceEngineLanguageCatalog.whisperLanguages.filter { language in
+        let languages = VoiceEngineLanguageCatalog.whisperLanguages.filter { language in
+            self.settings.selectedSpeechModel != .nemotronTranscribe ||
+                NemotronTranscribeFiles.languageCodes.contains(VoiceEngineLanguageCatalog.whisperLanguageCode(for: language.id) ?? "")
+        }
+        guard !query.isEmpty else { return languages }
+        return languages.filter { language in
             language.displayName.lowercased().contains(query) ||
                 language.id.lowercased().contains(query) ||
                 language.aliases.contains { $0.lowercased().contains(query) }
@@ -609,7 +627,7 @@ extension VoiceEngineSettingsView {
                             self.isShowingWhisperLanguagePicker = false
                         } label: {
                             self.whisperLanguagePickerRow(
-                                title: "Automatic",
+                                title: self.settings.selectedSpeechModel == .nemotronTranscribe ? "Unspecified language" : "Automatic",
                                 isSelected: self.settings.selectedWhisperLanguageCode == nil
                             )
                         }

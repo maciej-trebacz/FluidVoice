@@ -10,6 +10,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "Vendor/WebRTCAudioProcessing"),
+        .package(path: "Vendor/Nemotron"),
         .package(url: "https://github.com/mxcl/AppUpdater.git", from: "1.0.0"),
         .package(url: "https://github.com/altic-dev/FluidAudio.git", revision: "386f7195670b77f2954c7ee143ec63fcb50b6c3b"),
         .package(url: "https://github.com/mxcl/PromiseKit", from: "6.0.0"),
@@ -34,6 +35,7 @@ let package = Package(
                 "PromiseKit",
                 "DynamicNotchKit",
                 .product(name: "FluidAEC3Bridge", package: "WebRTCAudioProcessing"),
+                .product(name: "CNemotron", package: "Nemotron"),
                 .product(name: "TranscribeCpp", package: "transcribe-cpp-swift"),
                 .product(name: "ZeppelinEmbed", package: "zeppelin-embed"),
             ],

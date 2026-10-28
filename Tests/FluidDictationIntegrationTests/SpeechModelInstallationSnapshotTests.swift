@@ -49,6 +49,73 @@ private final nonisolated class CatalogTestClock: @unchecked Sendable {
 
 @MainActor
 final class SpeechModelInstallationSnapshotTests: XCTestCase {
+    func testNemotronTranscribeRealModelAndReleaseOnSwitch() async throws {
+        let environment = ProcessInfo.processInfo.environment
+        guard let directory = environment["NEMOTRON_TEST_MODEL_DIRECTORY"],
+              let audioPath = environment["NEMOTRON_TEST_AUDIO_FILE"],
+              let expected = environment["NEMOTRON_TEST_EXPECTED_TEXT"] else {
+            throw XCTSkip("Set the Nemotron model directory, 16 kHz Float32 audio file, and expected text to run this hardware test.")
+        }
+        let settings = SettingsStore.shared
+        let previousModel = settings.selectedSpeechModel
+        let previousLanguage = settings.selectedWhisperLanguageCode
+        let previousDirectory = UserDefaults.standard.string(forKey: NemotronTranscribeFiles.directoryKey)
+        defer {
+            settings.selectedSpeechModel = previousModel
+            settings.selectedWhisperLanguageCode = previousLanguage
+            UserDefaults.standard.set(previousDirectory, forKey: NemotronTranscribeFiles.directoryKey)
+        }
+        UserDefaults.standard.set(directory, forKey: NemotronTranscribeFiles.directoryKey)
+        settings.selectedSpeechModel = .nemotronTranscribe
+        settings.selectedWhisperLanguageCode = "pl"
+        let data = try Data(contentsOf: URL(fileURLWithPath: audioPath))
+        var samples = [Float](repeating: 0, count: data.count / MemoryLayout<Float>.size)
+        _ = samples.withUnsafeMutableBytes { data.copyBytes(to: $0) }
+        let service = ASRService()
+        let result = try await service.transcribeSamplesForAPI(samples)
+        XCTAssertEqual(result.text, expected)
+        let loadedBytes = try self.physicalFootprint()
+        settings.selectedSpeechModel = .whisperTiny
+        service.resetTranscriptionProvider()
+        try await Task.sleep(for: .milliseconds(500))
+        let releasedBytes = try self.physicalFootprint()
+        // The measured model occupies about 20 GiB. Allow for allocator/Metal caches.
+        XCTAssertGreaterThan(loadedBytes, releasedBytes + 8 * 1024 * 1024 * 1024)
+        print("NEMOTRON_APP_SWITCH loaded=\(loadedBytes) released=\(releasedBytes)")
+    }
+
+    private func physicalFootprint() throws -> UInt64 {
+        var info = task_vm_info_data_t()
+        var count = mach_msg_type_number_t(MemoryLayout<task_vm_info_data_t>.size / MemoryLayout<integer_t>.size)
+        let status = withUnsafeMutablePointer(to: &info) { pointer in
+            pointer.withMemoryRebound(to: integer_t.self, capacity: Int(count)) {
+                task_info(mach_task_self_, task_flavor_t(TASK_VM_INFO), $0, &count)
+            }
+        }
+        guard status == KERN_SUCCESS else {
+            throw NSError(domain: "NemotronMemoryTest", code: Int(status))
+        }
+        return info.phys_footprint
+    }
+
+    func testNemotronTranscribeSelectionRequiresBothFilesAndDoesNotLoadTheModel() async throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let model = SettingsStore.SpeechModel.nemotronTranscribe
+        let probe = SpeechModelInstallationSnapshot.Probe(modelID: model.id, kind: .nemotronTranscribe(path: root.path))
+        try Data("GGUFfixture".utf8).write(to: root.appendingPathComponent("model-IQ4_NL.gguf"))
+        let partial = try await SpeechModelInstallationSnapshot.scan([probe])
+        XCTAssertTrue(partial.isEmpty)
+        try Data("GGUFfixture".utf8).write(to: root.appendingPathComponent("model-Encoder-F16.gguf"))
+        let selected = try await SpeechModelInstallationSnapshot.scan([probe])
+        XCTAssertEqual(selected, [model.id])
+        XCTAssertFalse(model.supportsStreaming)
+        XCTAssertFalse(model.hasPerformanceRatings)
+        XCTAssertFalse(model.isWhisperModel)
+        XCTAssertNil(model.whisperModelFile)
+    }
+
     private func waitUntil(_ condition: @escaping @MainActor () async -> Bool) async throws {
         let deadline = Date().addingTimeInterval(2)
         while !(await condition()), Date() < deadline {
